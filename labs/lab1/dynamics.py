@@ -1,23 +1,41 @@
 import numpy as np
 
 def wrap_angle(angle):
-    return (angle + np.pi) % (2.0 * np.pi) - np.pi  # Normalize to [-pi, pi)
+    return (angle + np.pi) % (2.0 * np.pi) - np.pi
+
 
 def dynamics(state, action):
-        """
-        Compute the next state given current state and action using the base dynamics without noise.
-        This can be rewritten to improve the model.
 
-        The action (input) will be:
-            action = [speed, heading_cmd]
-        The returned state (output) will be:
-            state = [x_new, y_new, heading_new, speed_new]
-        """
-        x, y, heading, speed = state
-        speed_cmd, heading_cmd = action
-        # Simple unicycle model dynamics
+    x, y, heading, speed = state
+    speed_cmd, heading_cmd = action
+
+    if speed_cmd >= 0:
+        speed_new = speed_cmd
         heading_new = wrap_angle(heading_cmd)
-        speed_new = np.clip(speed + speed_cmd * 0.1, 0, 1.0)
-        x_new = x + speed_new * np.sin(heading_new) * 0.1
-        y_new = y + speed_new * np.cos(heading_new) * 0.1
-        return np.array([x_new, y_new, heading_new, speed_new], dtype=np.float32)
+    else:
+        speed_new = -speed_cmd
+        heading_new = wrap_angle(heading_cmd + np.pi)
+
+    # Calibration from real robot data
+    distance_scale = 4.0
+
+    x_new = (
+        x
+        + distance_scale
+        * speed_new
+        * np.sin(heading_new)
+        * 0.1
+    )
+
+    y_new = (
+        y
+        + distance_scale
+        * speed_new
+        * np.cos(heading_new)
+        * 0.1
+    )
+
+    return np.array(
+        [x_new, y_new, heading_new, speed_new],
+        dtype=np.float32
+    )
