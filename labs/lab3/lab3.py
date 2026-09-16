@@ -8,11 +8,13 @@ import argparse
 import numpy as np
 
 from Planner import *
+from sphero_env.envs.custom_maze_full import build_occupancy_grid
 
 from contextlib import ExitStack, contextmanager
 
 LAB1_SEED = 0
-MAX_STEPS = 500
+MAX_STEPS = 5000
+map = build_occupancy_grid()
 
 ### Custom dynamics function for the Sphero robot - replace this with the one you developed in Lab 1
 def wrap_angle(angle):
@@ -52,11 +54,12 @@ def make_sim_env():
         dt=0.1,
         max_steps=5000,
         vel_limit=0.15,
-        world_width=5.0,
-        world_height=5.0,
+        world_width=1.25,
+        world_height=1.25,
         goal_pos=(0.5, 0.5),
         goal_tolerance=0.1,
-        occupancy_grid=None,
+        occupancy_grid=map,
+        grid_resolution=0.125,
         dynamics=dynamics,
         obs_noise_std_pos=0.05,
         process_noise_std_speed=0.005,
@@ -110,6 +113,9 @@ def managed_env(sim: bool):
 def control_loop(control_env):
 
     obs, _ = control_env.reset(seed=LAB1_SEED)
+
+    control_env.state_true[0:3] = np.array([-0.5, -0.5, 0.0])
+    control_env.state_odom[0:3] = np.array([-0.5, -0.5, 0.0])
     rng = np.random.default_rng(LAB1_SEED)
 
     controller = Controller(dt=control_env.dt)

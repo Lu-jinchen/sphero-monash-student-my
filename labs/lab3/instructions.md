@@ -9,11 +9,25 @@ In Lab 3, you need to implement an A* path planner (or something else, eg. RRT, 
 
 ## What you need to do
 
-- **Implement a global waypoint planner** to escape a grid like mazeworld.
+- **Implement a global waypoint planner** to escape a grid-like mazeworld.
 - **Add a lower level controller** to move between these waypoints.
 - **Add replanning as required** to ensure the robot escapes a known maze.
 
 The lab3.py skeleton is pre-configured with code to generate a simulated maze matching our labs, with the end goal as a target.
+
+If you would like to see more detail about this map, run
+
+```python3 src/sphero_env/envs/custom_maze_full.py```
+
+for a visualisation and resolution and scale settings.
+
+If you want to test your planner on other maps, you can generate new mazes with the python code below.
+
+```
+from sphero_env.envs.maze_generator import MazeGenerator
+mg = MazeGenerator(width,height,seed)
+map,start,goal = mg.generate()
+```
 
 ## Submission requirements
 
@@ -37,9 +51,9 @@ The automarker reads a CSV log from `studentid_lab3.csv`.
 
 | Metric | Default threshold |
 | --- | --- |
-| Final distance to target (real) | ≤ 0.10 m | 
+| Final distance to goal (real) | ≤ 0.10 m | 
 | Distance to optimal path (real) | ≤ 0.20 m | 
-| Final distance to target (sim) | ≤ 0.10 m |
+| Final distance to goal (sim) | ≤ 0.10 m |
 | Distance to optimal path (sim) | ≤ 0.20 m | 
 
 ## Setting yourself up for Lab 4
