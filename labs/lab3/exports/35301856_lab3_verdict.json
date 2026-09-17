@@ -1,0 +1,135 @@
+{
+  "csv": "D:\\Jinchen Lu\\s2 2026\\5178\\sphero-monash-student-my\\labs\\lab3\\exports\\35301856_lab3.csv",
+  "created_utc": "2026-09-17T12:39:37.463629+00:00",
+  "rows": 179,
+  "mode": "sim",
+  "report": {
+    "pass": true,
+    "checks": {
+      "final_distance_real": {
+        "value": 0.009428080368553615,
+        "threshold": 0.1,
+        "pass": true
+      },
+      "distance_to_optimal_path_real": {
+        "value": 0.021852491486256804,
+        "threshold": 0.2,
+        "pass": true
+      },
+      "final_distance_sim": {
+        "value": 0.013565584963344627,
+        "threshold": 0.1,
+        "pass": true
+      },
+      "distance_to_optimal_path_sim": {
+        "value": 0.013565584963344627,
+        "threshold": 0.2,
+        "pass": true
+      }
+    },
+    "path_metric": "maximum point-to-optimal-polyline distance (conservative)",
+    "mean_deviation_sim": 0.00727567860715499,
+    "mean_deviation_real": 0.004577786386156405,
+    "rms_deviation_sim": 0.008127910287739454,
+    "rms_deviation_real": 0.005828638906665051,
+    "steps": 179,
+    "elapsed_s": 17.8,
+    "collisions": 0,
+    "replans": 0,
+    "rejected_measurements": 0,
+    "goal_creep_nudges": 0,
+    "stopped_by_user": false,
+    "goal_hold_steps": 12,
+    "planner_nodes": 17,
+    "optimal_length_m": 2.0,
+    "control_waypoints": [
+      [
+        -0.5,
+        -0.0
+      ],
+      [
+        -0.25,
+        -0.0
+      ],
+      [
+        -0.25,
+        0.5
+      ],
+      [
+        0.5,
+        0.5
+      ]
+    ],
+    "real_goal_lead_m": 0.0
+  },
+  "optimal_path": [
+    [
+      -0.5,
+      -0.5
+    ],
+    [
+      -0.5,
+      -0.375
+    ],
+    [
+      -0.5,
+      -0.25
+    ],
+    [
+      -0.5,
+      -0.125
+    ],
+    [
+      -0.5,
+      -0.0
+    ],
+    [
+      -0.375,
+      -0.0
+    ],
+    [
+      -0.25,
+      -0.0
+    ],
+    [
+      -0.25,
+      0.125
+    ],
+    [
+      -0.25,
+      0.25
+    ],
+    [
+      -0.25,
+      0.375
+    ],
+    [
+      -0.25,
+      0.5
+    ],
+    [
+      -0.125,
+      0.5
+    ],
+    [
+      0.0,
+      0.5
+    ],
+    [
+      0.125,
+      0.5
+    ],
+    [
+      0.25,
+      0.5
+    ],
+    [
+      0.375,
+      0.5
+    ],
+    [
+      0.5,
+      0.5
+    ]
+  ]
+}

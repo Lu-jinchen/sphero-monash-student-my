@@ -82,6 +82,12 @@ class SpheroEnv(gym.Env):
         heading_tolerance: float = 0.05,     # rad; must be within this to translate
         speed_scale: float = 1.0,              # scale factor for converting action speed to true speed
 
+        # Initial heading at reset(). None keeps the original behaviour (a
+        # uniform random heading), which is fine for RL but makes sim-vs-real
+        # comparison impossible: the real robot always starts at heading 0
+        # after reset_aim(). Set 0.0 for calibration runs.
+        initial_heading: Optional[float] = None,
+
         # World dimensions (meters)
         world_width: float = 2.0,
         world_height: float = 2.0,
@@ -122,6 +128,7 @@ class SpheroEnv(gym.Env):
 
         self.max_turn_rate = max_turn_rate
         self.heading_tolerance = heading_tolerance
+        self.initial_heading = initial_heading
 
         # World geometry
         self.world_width = world_width
@@ -307,7 +314,10 @@ class SpheroEnv(gym.Env):
         # else:
         x0, y0 = 0.0, 0.0
 
-        heading0 = float(rng.uniform(-np.pi, np.pi))
+        if self.initial_heading is None:
+            heading0 = float(rng.uniform(-np.pi, np.pi))
+        else:
+            heading0 = float(self._wrap_angle(self.initial_heading))
         speed0 = 0.0
 
         # No collision at reset
