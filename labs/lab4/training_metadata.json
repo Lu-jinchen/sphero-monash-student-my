@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-09-26T12:42:31.641939+00:00",
+  "status": "complete",
+  "approach": "behaviour cloning from Lab 3 A* + PID expert",
+  "weights": "C:\\Users\\amith\\Desktop\\Monash\\Year 1 Sem 2\\ECE5178 - Intelligent robotics\\Lab work\\sphero-monash-student-main\\sphero-monash-student-main\\labs\\lab4\\weight.pth",
+  "sources": [
+    "real"
+  ],
+  "require_pass": true,
+  "collision_free_rows": true,
+  "excluded_non_goal_zero_speed_rows": true,
+  "split": "whole rollout (no adjacent-timestep leakage)",
+  "seed": 7,
+  "epochs_requested": 300,
+  "epochs_completed": 300,
+  "best_epoch": 278,
+  "best_val_loss": 0.012861412018537521,
+  "train_runs": [
+    "20260918T001254Z__real__lab3__astar-lab2-pid",
+    "20260911T010323Z__real__lab3__astar-lab2-pid",
+    "20260911T015444Z__real__lab3__astar-lab2-pid",
+    "20260918T001703Z__real__lab3__astar-lab2-pid",
+    "20260917T111502Z__real__lab3__astar-lab2-pid",
+    "20260911T005406Z__real__lab3__astar-lab2-pid",
+    "20260917T110756Z__real__lab3__astar-lab2-pid",
+    "20260911T015233Z__real__lab3__astar-lab2-pid",
+    "20260911T001435Z__real__lab3__astar-lab2-pid",
+    "20260910T155156Z__real__lab3__astar-lab2-pid",
+    "20260918T002015Z__real__lab3__astar-lab2-pid",
+    "20260911T010010Z__real__lab3__astar-lab2-pid",
+    "20260911T003044Z__real__lab3__astar-lab2-pid",
+    "20260911T022627Z__real__lab3__astar-lab2-pid"
+  ],
+  "validation_runs": [
+    "20260911T002714Z__real__lab3__astar-lab2-pid",
+    "20260911T001620Z__real__lab3__astar-lab2-pid",
+    "20260918T001124Z__real__lab3__astar-lab2-pid"
+  ],
+  "train_samples": 1522,
+  "validation_samples": 308,
+  "independent_variables": [
+    "x / coordinate_scale",
+    "y / coordinate_scale",
+    "(goal_x - x) / coordinate_scale",
+    "(goal_y - y) / coordinate_scale",
+    "sin(heading)",
+    "cos(heading)",
+    "speed / physical_speed_scale",
+    "collision flag"
+  ],
+  "dependent_variables": [
+    "speed_cmd",
+    "sin(heading_cmd)",
+    "cos(heading_cmd)"
+  ],
+  "loss": "MSE(speed_cmd/max_speed_cmd) + heading_weight * MSE(direction vector)",
+  "hyperparameters": {
+    "learning_rate": 0.002,
+    "batch_size": 256,
+    "hidden": 64,
+    "val_fraction": 0.2,
+    "patience": 60,
+    "heading_weight": 1.0
+  },
+  "speed_mae": 0.0036269626580178738,
+  "heading_mae_deg": 0.5568763017654419
+}
