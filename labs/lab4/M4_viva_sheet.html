@@ -1,0 +1,418 @@
+<title>Sphero M4 Viva Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column (lab-notebook width) with wide tables/code allowed to scroll; question cards keyed to the TA's list. */
+:root {
+  --bg: #f3f5f7;
+  --paper: #ffffff;
+  --ink: #17202a;
+  --muted: #566573;
+  --rule: #d5dde4;
+  --accent: #1f5f8b;        /* maze-plate blue */
+  --accent-soft: #e3eef6;
+  --good: #2e7d4f;
+  --warn: #a5631b;
+  --code-bg: #eef2f5;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171c; --paper: #1a2128; --ink: #e6ecf1; --muted: #9aa8b5; --rule: #2c3640;
+    --accent: #7fb6dd; --accent-soft: #1d2f3d; --good: #6cc191; --warn: #e0a463; --code-bg: #212a33;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171c; --paper: #1a2128; --ink: #e6ecf1; --muted: #9aa8b5; --rule: #2c3640;
+  --accent: #7fb6dd; --accent-soft: #1d2f3d; --good: #6cc191; --warn: #e0a463; --code-bg: #212a33;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; margin: 0; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 18px; padding-block: 28px 64px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.45rem; font-weight: 700; }
+h3 { font-size: 1.08rem; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.lede { color: var(--muted); max-width: 65ch; }
+header { display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--font-mono); font-size: 0.78rem; padding: 3px 10px; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper); color: var(--muted); }
+section { display: grid; gap: 14px; min-width: 0; }
+.card { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.say { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 12px 16px; border-radius: 0 8px 8px 0; }
+.say p + p { margin-top: 6px; }
+.q { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: baseline; }
+.qn { font-family: var(--font-mono); font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+ul, ol { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--code-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 0; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.5; }
+pre code { background: none; padding: 0; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.eq { font-family: var(--font-mono); font-size: 0.98rem; background: var(--code-bg); border-radius: 8px; padding: 14px 16px; overflow-x: auto; white-space: nowrap; }
+.bars { display: grid; gap: 14px; }
+.bar-group { display: grid; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: 11.5em 1fr 4.5em; gap: 10px; align-items: center; font-size: 0.88rem; }
+.bar-track { background: var(--code-bg); border-radius: 4px; height: 14px; position: relative; }
+.bar { height: 100%; border-radius: 4px; background: var(--muted); }
+.bar.ours { background: var(--accent); }
+.bar-val { font-family: var(--font-mono); font-size: 0.82rem; text-align: right; font-variant-numeric: tabular-nums; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.grid2 > * { min-width: 0; }
+.tag-good { color: var(--good); font-weight: 700; }
+.tag-warn { color: var(--warn); font-weight: 700; }
+.small { font-size: 0.88rem; color: var(--muted); }
+nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.9rem; }
+nav a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+nav a:hover, nav a:focus-visible { border-bottom-color: var(--accent); outline: none; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mermaid { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 12px; overflow-x: auto; }
+@media (max-width: 520px) {
+  .bar-row { grid-template-columns: 1fr 4em; }
+  .bar-row .bar-label { grid-column: 1 / -1; }
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">ECE5178 · Milestone 4 · student 37482025</span>
+  <h1>Sphero M4 Viva Sheet</h1>
+  <p class="lede">Learned dynamics model + model-predictive control (MPC) on the Sphero BOLT+. Every answer below is taken from the code that runs the robot, with the real numbers from the model's training report.</p>
+  <div class="chips">
+    <span class="chip">labs/lab4/dynamics_learning.py</span>
+    <span class="chip">labs/lab4/learned_mpc.py</span>
+    <span class="chip">labs/lab4/lab4.py</span>
+    <span class="chip">dynamics_model_real.pth</span>
+  </div>
+  <nav aria-label="Sections">
+    <a href="#pitch">30-second answer</a><a href="#pipeline">End to end</a><a href="#q1">Method</a><a href="#q2">Why</a><a href="#q3">Inputs/outputs</a><a href="#q4">Loss</a><a href="#q5">Parameters</a><a href="#q6">Training</a><a href="#q7">Data</a><a href="#q8">Changes</a><a href="#results">Results</a><a href="#demo">Demo</a><a href="#followups">Follow-ups</a>
+  </nav>
+</header>
+
+<section id="pitch">
+  <h2>The 30-second answer</h2>
+  <div class="say">
+    <p><strong>"We learned a model of how our robot actually moves, then used it to choose every command."</strong></p>
+    <p>A small neural network was trained on 230 logged real-robot runs to predict, from the ball's velocity and the command, where the ball will be one step later and how fast it will be going. Each control step, the controller tries 30 candidate commands, rolls each one forward through that model for 1.2 s, and also checks where the ball would come to rest if the drive were cut. It sends the cheapest one: most progress along the A* route, least drift off the centreline, no predicted overshoot past the next corner or the goal, no predicted wall contact. A safety layer handles jams.</p>
+  </div>
+</section>
+
+<section id="pipeline">
+  <h2>End to end, one control step</h2>
+  <pre class="mermaid">
+flowchart LR
+  A["Robot sensors<br/>locator x,y · gyro heading · speed"] --> B["Lab 2 EKF<br/>state estimate x,y,θ,v"]
+  B --> C["Lab 3 A*<br/>route + turning points"]
+  B --> D["MPC: 30 candidate commands<br/>6 speeds × 5 headings"]
+  C --> D
+  M["LEARNED dynamics model<br/>6 → 64 → 64 → 4"] --> D
+  D --> E["Lab 4 safety layer<br/>push-and-check, stall, walls"]
+  E --> F["Command<br/>speed_cmd, heading_cmd"]
+  F --> A
+  </pre>
+  <div class="card">
+    <ol>
+      <li><strong>Sense.</strong> The robot reports its locator position, heading and speed (about every 0.2 s over Bluetooth).</li>
+      <li><strong>Estimate.</strong> The Lab 2 EKF fuses that with the motion model into the state <code>[x, y, θ, v]</code> in maze coordinates.</li>
+      <li><strong>Plan.</strong> Lab 3's A* gives the route: start (0,4) → (0,2) → (1,2) → (1,0) → goal (4,0).</li>
+      <li><strong>Choose (the learned part).</strong> 30 candidate commands are rolled through the learned model in one batch, scored, and the cheapest is picked.</li>
+      <li><strong>Check.</strong> The safety layer passes it through, or takes over if the ball is jammed, stalled or off the corridor.</li>
+      <li><strong>Act.</strong> The command goes to the robot; repeat.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="q1">
+  <div class="q"><span class="qn">Q1</span><h2>What learning method did you use?</h2></div>
+  <div class="card">
+    <div class="say"><p><strong>Learned dynamics model + model-predictive control.</strong> This is the first option on Ed #140: "learn a dynamics model, and use your existing navigation stack to optimise with respect to this".</p></div>
+    <ul>
+      <li><strong>What is learned:</strong> the robot's one-step dynamics, i.e. where it goes and how fast, given its velocity and command. Supervised regression on logged real data.</li>
+      <li><strong>How it is used:</strong> sampling-based MPC. A* still decides the route; every command is chosen by predicting the ball through the learned model.</li>
+      <li><strong>Before this</strong> we tried behaviour cloning (copying the Lab 3 A* + PID expert). It is still in the code as a fallback; see Q2 for why it was replaced.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="q2">
+  <div class="q"><span class="qn">Q2</span><h2>Why did you choose this method?</h2></div>
+  <div class="card">
+    <p>Every hardware failure in the first Lab 4 runs was a <strong>dynamics</strong> problem, not a planning problem:</p>
+    <ul>
+      <li>The ball keeps rolling after the drive is cut: <strong>5.5 cm on average, up to about 12 cm</strong>. It overshot corners and the goal.</li>
+      <li>A command of 0.042 produced about 0.13 m/s on the floor: commanded speed is not real speed.</li>
+      <li>There is actuation latency: right after a command from rest, the ball barely moves for a step.</li>
+    </ul>
+    <div class="grid2">
+      <div><h3>Behaviour cloning</h3><p class="small">A memoryless copy of the expert. It never learned the coast, rounded every corner (7.2 cm error at the tightest), and on its own reached the goal in 0 of 10 simulator runs. It can only be as good as the expert it copies.</p></div>
+      <div><h3>Reinforcement learning</h3><p class="small">Would train in the simulator, but the simulator barely coasts and has no gap between commanded and real speed, so the policy would not transfer. Training on the robot would need far more runs than we have.</p></div>
+    </div>
+    <div class="say"><p>A learned dynamics model learns exactly what was wrong (the coast, the speed gain, the latency) from data we already had, and the MPC uses it to brake in time for each corner instead of using hand-tuned constants.</p></div>
+  </div>
+</section>
+
+<section id="q3">
+  <div class="q"><span class="qn">Q3</span><h2>What are the inputs and outputs of your policy?</h2></div>
+  <div class="card">
+    <h3>The policy as a whole (what the marker calls)</h3>
+    <div class="scroll"><table>
+      <tr><th>Input: <code>obs</code> from <code>step()</code></th><th>Output: action to <code>step()</code></th></tr>
+      <tr><td><code>[x, y, heading, speed, collision]</code><br><span class="small">x, y in metres; heading 0 = +y, +π/2 = +x</span></td><td><code>[speed_cmd, heading_cmd]</code><br><span class="small">heading_cmd is an absolute heading, not a turn rate</span></td></tr>
+    </table></div>
+    <h3>The learned dynamics model (the part that is trained)</h3>
+    <p class="small">Everything is in the frame of the <em>commanded heading</em>: "forward" is along the direction the ball was told to go, "lateral" is perpendicular. That makes the model independent of where the ball is in the maze, and a turn shows up as lateral velocity.</p>
+    <div class="scroll"><table>
+      <tr><th>#</th><th>Input (6)</th><th>Meaning</th><th>Unit</th></tr>
+      <tr><td>1</td><td><code>v_fwd</code></td><td>current velocity along the commanded heading</td><td>m/s</td></tr>
+      <tr><td>2</td><td><code>v_lat</code></td><td>current velocity across it</td><td>m/s</td></tr>
+      <tr><td>3</td><td><code>speed_cmd</code></td><td>the speed command being considered</td><td>cmd</td></tr>
+      <tr><td>4</td><td><code>prev_fwd</code></td><td>previous command × cos(turn): carries the latency</td><td>cmd</td></tr>
+      <tr><td>5</td><td><code>prev_lat</code></td><td>previous command × sin(turn): carries the size of the turn</td><td>cmd</td></tr>
+      <tr><td>6</td><td><code>dt</code></td><td>length of the control step</td><td>s</td></tr>
+    </table></div>
+    <div class="scroll"><table>
+      <tr><th>#</th><th>Output (4)</th><th>Meaning</th><th>Unit</th></tr>
+      <tr><td>1</td><td><code>d_fwd</code></td><td>distance moved along the commanded heading this step</td><td>m</td></tr>
+      <tr><td>2</td><td><code>d_lat</code></td><td>distance moved across it</td><td>m</td></tr>
+      <tr><td>3</td><td><code>v_fwd'</code></td><td>forward velocity at the end of the step</td><td>m/s</td></tr>
+      <tr><td>4</td><td><code>v_lat'</code></td><td>lateral velocity at the end of the step</td><td>m/s</td></tr>
+    </table></div>
+    <p class="small">Why the previous command: the first version had only velocity and the current command. Starting from rest it saw "at rest, commanded" and predicted no motion on every step, so the controller never left the start. Adding the previous command fixed that.</p>
+  </div>
+</section>
+
+<section id="q4">
+  <div class="q"><span class="qn">Q4</span><h2>What does your loss function do?</h2></div>
+  <div class="card">
+    <h3>Training loss of the dynamics model</h3>
+    <div class="eq">L = (1 / (N·4)) · Σ<sub>i=1..N</sub> Σ<sub>k=1..4</sub> ( (ŷ<sub>ik</sub> − y<sub>ik</sub>) / σ<sub>k</sub> )²</div>
+    <pre><code># dynamics_learning.py, train()
+loss = (((model(xt[idx]) - yt[idx]) / ys) ** 2).mean()</code></pre>
+    <ul>
+      <li><strong>ŷ</strong>: the model's prediction of the 4 outputs (displacement and next velocity); <strong>y</strong>: what the ball really did in the log.</li>
+      <li><strong>σ<sub>k</sub></strong> (<code>ys = y_std</code>): the standard deviation of output k over the training set.</li>
+      <li><strong>Mean over the batch and the 4 outputs</strong>: it is a mean squared error.</li>
+    </ul>
+    <div class="say"><p><strong>In words:</strong> it measures how far the predicted motion is from the real motion, with each output measured in units of its own spread. Displacements are millimetres and velocities are tenths of a metre per second, so without dividing by σ the loss would only care about the velocity terms. Normalising makes all four count equally.</p></div>
+    <p class="small">Model selection: after every epoch the same loss is computed on <strong>held-out runs</strong>, and the weights from the epoch with the lowest held-out loss are kept (0.299 for the deployed model, i.e. about 70% of each output's variance explained, one step ahead).</p>
+    <h3>The MPC's cost (what it minimises when choosing a command)</h3>
+    <div class="eq">J = −30·progress + 600·Σ lateral² + 8000·overshoot² + 3000·overshoot + 10000·[wall] + 0.02·|Δheading|</div>
+    <div class="scroll"><table>
+      <tr><th>Term</th><th>What it rewards or penalises</th><th class="num">Weight</th></tr>
+      <tr><td>progress</td><td>distance gained along the current route segment over the 1.2 s horizon</td><td class="num">−30</td></tr>
+      <tr><td>lateral²</td><td>drifting off the centreline (squared, summed over the horizon)</td><td class="num">600</td></tr>
+      <tr><td>overshoot</td><td>predicted resting point past the next corner (or 4 cm short of the goal), if the drive were cut now</td><td class="num">8000 (sq) + 3000 (lin)</td></tr>
+      <tr><td>[wall]</td><td>any predicted point touching a physical wall</td><td class="num">10000</td></tr>
+      <tr><td>|Δheading|</td><td>swinging the heading about</td><td class="num">0.02</td></tr>
+    </table></div>
+    <p class="small">The "drive cut" test is what replaced hand-tuned braking: the controller only goes as fast as the learned coast says it can still stop at the corner.</p>
+    <h3>If asked about the earlier behaviour-cloning loss</h3>
+    <div class="eq">L = MSE(speed̂ / max_speed, speed / max_speed) + λ · mean((sinθ̂ − sinθ)² + (cosθ̂ − cosθ)²),  λ = 1</div>
+    <p class="small">Heading as sin/cos so −π and +π are the same direction. Trained on 1,522 rows from passing Lab 3 runs; it was replaced because it could not learn the coast.</p>
+  </div>
+</section>
+
+<section id="q5">
+  <div class="q"><span class="qn">Q5</span><h2>What do the terms and parameters represent?</h2></div>
+  <div class="card">
+    <h3>Network and training</h3>
+    <div class="scroll"><table>
+      <tr><th>Parameter</th><th>Value</th><th>Meaning</th></tr>
+      <tr><td>layers</td><td class="mono">6 → 64 → 64 → 4</td><td>small multilayer perceptron; enough for a smooth physical mapping, small enough to roll 30 candidates about 20 steps ahead every 0.2 s</td></tr>
+      <tr><td>activation</td><td class="mono">tanh</td><td>smooth, so predicted motion changes smoothly with the command</td></tr>
+      <tr><td><code>x_mean, x_std</code></td><td>from training set</td><td>inputs are standardised to mean 0, std 1 before the network</td></tr>
+      <tr><td><code>y_mean, y_std</code></td><td>from training set</td><td>the network predicts standardised outputs; these turn them back into metres and m/s, and <code>y_std</code> is the σ in the loss</td></tr>
+      <tr><td>optimiser</td><td class="mono">Adam, lr 3e-3</td><td>learning rate: step size of each weight update</td></tr>
+      <tr><td>batch size</td><td class="mono">512</td><td>transitions per gradient step</td></tr>
+      <tr><td>epochs</td><td class="mono">400</td><td>passes over the training data; best held-out epoch kept</td></tr>
+      <tr><td>validation</td><td class="mono">20% of runs</td><td>held out as whole runs, so neighbouring time steps never appear on both sides</td></tr>
+      <tr><td><code>DT_RANGE</code></td><td class="mono">0.05–1.2 s</td><td>steps outside this are stalls or batched Bluetooth samples, dropped</td></tr>
+      <tr><td><code>MAX_STEP_M</code></td><td class="mono">0.15 m</td><td>a jump bigger than this in one step is a locator resync, not motion, dropped</td></tr>
+    </table></div>
+    <h3>MPC</h3>
+    <div class="scroll"><table>
+      <tr><th>Parameter</th><th>Value</th><th>Meaning</th></tr>
+      <tr><td><code>SPEED_FRACTIONS</code></td><td class="mono">0, .2, .4, .6, .8, 1</td><td>candidate speeds as fractions of cruise</td></tr>
+      <tr><td><code>HEADING_OFFSETS</code></td><td class="mono">±0.45, ±0.22, 0 rad</td><td>candidate headings around the aim point</td></tr>
+      <tr><td><code>LOOKAHEAD</code></td><td class="mono">0.10 m</td><td>aim point this far ahead along the route (pure pursuit)</td></tr>
+      <tr><td><code>HORIZON_S</code></td><td class="mono">1.2 s</td><td>how far ahead each candidate is held and scored</td></tr>
+      <tr><td><code>STOP_S</code></td><td class="mono">2.2 s</td><td>how long the "drive cut" coast is rolled to find the resting point</td></tr>
+      <tr><td><code>GOAL_AIM_SHORT</code></td><td class="mono">0.04 m</td><td>aim to stop 4 cm short of the goal centre (the ball consistently rolled 4–6 cm past)</td></tr>
+      <tr><td><code>REST_FRACTIONS</code></td><td class="mono">0, .8, 1</td><td>from rest only "stop" or a real push, because the model is weakest at starting from standstill</td></tr>
+    </table></div>
+    <h3>Run settings (dashboard)</h3>
+    <div class="scroll"><table>
+      <tr><th>Setting</th><th>Value</th><th>Meaning</th></tr>
+      <tr><td>Speed scale</td><td class="mono">1.93</td><td>cruise = 0.042 × scale. 1.93 gives motor power raw 45 (≈0.16 m/s). The old setting of 20 was clipped to the same raw 45</td></tr>
+      <tr><td>Corner 2 / Corner 3 approach</td><td class="mono">0.6 / 0.8</td><td>slower top speed on the straights into those corners</td></tr>
+      <tr><td>Goal approach speed</td><td class="mono">1 (off)</td><td>optional slowdown over the last 30 cm to the goal</td></tr>
+      <tr><td>Estimate relocation / Wedge guards</td><td class="mono">off / off</td><td>optional safety features, off as on the best runs</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section id="q6">
+  <div class="q"><span class="qn">Q6</span><h2>How did you train the model?</h2></div>
+  <div class="card">
+    <p class="small">The TA focus: <em>how the training function processes its inputs</em>. Two functions do it.</p>
+    <h3>1. <code>load_run()</code>: one logged run → training pairs (X, Y)</h3>
+    <pre><code>for t in range(1, len(a) - 1):                    # needs t-1 and t+1
+    if dt outside 0.05..1.2 s: skip                 # stalls / batched samples
+    step_in  = pos[t]   - pos[t-1]                  # how it arrived
+    step_out = pos[t+1] - pos[t]                    # what it did next (the target)
+    if either step &gt; 0.15 m: skip                   # locator glitch
+    heading = cmd[t].heading                        # commanded heading = the frame
+    vf, vl   = to_cmd_frame(step_in / dt_in, heading)    # input velocity
+    df, dl   = to_cmd_frame(step_out, heading)           # target displacement
+    vf2, vl2 = to_cmd_frame(step_out / dt_out, heading)  # target velocity
+    turn = wrap(cmd[t-1].heading - heading)
+    pf, pl = cmd[t-1].speed * cos(turn), cmd[t-1].speed * sin(turn)
+    X.append([vf, vl, cmd[t].speed, pf, pl, dt_out])
+    Y.append([df, dl, vf2, vl2])</code></pre>
+    <h3>2. <code>train()</code>: fit the network</h3>
+    <ol>
+      <li>Shuffle the runs (seed 0); hold out 20% of runs as validation.</li>
+      <li>Compute <code>x_mean, x_std, y_mean, y_std</code> on the training transitions and store them inside the model.</li>
+      <li>For 400 epochs: shuffle the transitions, step through them in batches of 512, compute the normalised MSE (Q4), back-propagate, Adam step.</li>
+      <li>After each epoch, compute the same loss on the held-out runs; keep the best weights.</li>
+      <li>Report errors on the held-out runs against two baselines and save <code>dynamics_model_real.pth</code>.</li>
+    </ol>
+    <pre><code>python labs/lab4/dynamics_learning.py --source real --epochs 400</code></pre>
+  </div>
+</section>
+
+<section id="q7">
+  <div class="q"><span class="qn">Q7</span><h2>Where did the training data come from?</h2></div>
+  <div class="card">
+    <div class="say"><p>Our own robot logs. Every real-robot run from Labs 1 to 4 is archived with its positions, commands and timing (<code>labs/lab1/runs/*/data.csv</code>), and the model learns from all of them.</p></div>
+    <div class="scroll"><table>
+      <tr><th>Source</th><th>What the runs were</th></tr>
+      <tr><td>Lab 1</td><td>system-identification experiments: steps, staircases, speed sweeps, PID tests</td></tr>
+      <tr><td>Lab 2</td><td>EKF waypoint missions</td></tr>
+      <tr><td>Lab 3</td><td>A* + PID maze runs</td></tr>
+      <tr><td>Lab 4</td><td>behaviour-cloning runs on the maze</td></tr>
+    </table></div>
+    <div class="scroll"><table>
+      <tr><th></th><th class="num">Runs</th><th class="num">Transitions</th></tr>
+      <tr><td>Training</td><td class="num">184</td><td class="num">13,470</td></tr>
+      <tr><td>Held out (validation)</td><td class="num">46</td><td class="num">3,423</td></tr>
+      <tr><td><strong>Total</strong></td><td class="num"><strong>230</strong></td><td class="num"><strong>16,893</strong></td></tr>
+    </table></div>
+    <p class="small">Real-robot data only. A separate model is trained for the simulator, because the simulator does not coast and would teach the wrong physics.</p>
+  </div>
+</section>
+
+<section id="q8">
+  <div class="q"><span class="qn">Q8</span><h2>What changes did you make?</h2></div>
+  <div class="card">
+    <p class="small">In the order they were made, each one in response to something seen on the robot.</p>
+    <ol>
+      <li><strong>Behaviour cloning first.</strong> Network copying the Lab 3 expert, with a safety layer; corners and the coast were the weak point.</li>
+      <li><strong>Learned dynamics + MPC.</strong> Learned the coast, speed gain and latency from all logged runs.</li>
+      <li><strong>Previous command as an input.</strong> Without it the model predicted no motion from rest and the ball never left the start.</li>
+      <li><strong>Overshoot priced at every corner, not only the goal.</strong> Corner 3 had been running 4–6 cm past.</li>
+      <li><strong>Aim 4 cm short of the goal.</strong> The ball consistently finished 4–6 cm past the centre.</li>
+      <li><strong>At rest, never choose to stay stopped.</strong> The MPC parked at corners because the model is weakest at starting from standstill.</li>
+      <li><strong>Safety layer (push-and-check).</strong> Detects a stall, a collision flag or slow progress, pushes along the route, then checks whether the ball really moved.</li>
+      <li><strong>Slow approaches into corners 2 and 3.</strong> Fewer wall hits at the tight turns.</li>
+      <li><strong>Honest speed scale.</strong> The old scale of 20 was silently clipped to motor power raw 45; now 1.93 means raw 45 and higher really is faster.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="results">
+  <h2>Does the learned model actually help?</h2>
+  <div class="card">
+    <p class="small">Measured on the 46 held-out runs, which the model never trained on, against two simple models: <strong>constant velocity</strong> (the ball keeps doing what it was doing) and the <strong>simulator's assumption</strong> (it moves at the commanded speed). Lower is better.</p>
+    <div class="bars">
+      <div class="bar-group">
+        <h3>Error one step ahead (mm)</h3>
+        <div class="bar-row"><span class="bar-label">Simulator assumption</span><div class="bar-track"><div class="bar" style="width:100%"></div></div><span class="bar-val">12.2</span></div>
+        <div class="bar-row"><span class="bar-label">Constant velocity</span><div class="bar-track"><div class="bar" style="width:42.7%"></div></div><span class="bar-val">5.2</span></div>
+        <div class="bar-row"><span class="bar-label"><strong>Learned model</strong></span><div class="bar-track"><div class="bar ours" style="width:32.5%"></div></div><span class="bar-val">4.0</span></div>
+      </div>
+      <div class="bar-group">
+        <h3>Error six steps ahead, about 1.2 s (cm)</h3>
+        <div class="bar-row"><span class="bar-label">Simulator assumption</span><div class="bar-track"><div class="bar" style="width:100%"></div></div><span class="bar-val">5.4</span></div>
+        <div class="bar-row"><span class="bar-label">Constant velocity</span><div class="bar-track"><div class="bar" style="width:87.7%"></div></div><span class="bar-val">4.8</span></div>
+        <div class="bar-row"><span class="bar-label"><strong>Learned model</strong></span><div class="bar-track"><div class="bar ours" style="width:39.6%"></div></div><span class="bar-val">2.1</span></div>
+      </div>
+      <div class="bar-group">
+        <h3>Error predicting the coast after the drive is cut (cm, 72 events, ball rolled 5.5 cm on average)</h3>
+        <div class="bar-row"><span class="bar-label">Hand fit 0.03 + 0.7·v</span><div class="bar-track"><div class="bar" style="width:100%"></div></div><span class="bar-val">5.7</span></div>
+        <div class="bar-row"><span class="bar-label"><strong>Learned model</strong></span><div class="bar-track"><div class="bar ours" style="width:38.1%"></div></div><span class="bar-val">2.2</span></div>
+      </div>
+    </div>
+    <p class="small">The six-step number is the one that matters for MPC: errors compound when you plan ahead, and the learned model is less than half as wrong as either baseline over the 1.2 s horizon.</p>
+  </div>
+</section>
+
+<section id="demo">
+  <h2>Demo day</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Settings (Lab 4 tab)</h3>
+      <ul>
+        <li>Source: <strong>Robot + sim</strong></li>
+        <li>Controller: <strong>Learned dynamics + MPC</strong></li>
+        <li>Speed scale <strong>1.93</strong> · dt 0.68 · goal hold 12</li>
+        <li>Corner 2 <strong>0.6</strong> · Corner 3 <strong>0.8</strong></li>
+        <li>Goal approach <strong>1</strong> · Wedge guards <strong>Off</strong> · Relocation <strong>Off</strong></li>
+        <li>Aim by hand first: <strong>on</strong></li>
+      </ul>
+      <p class="small">Check these fields after Ctrl+F5: the browser remembers old values.</p>
+    </div>
+    <div class="card">
+      <h3>Before each run</h3>
+      <ul>
+        <li>Robot charged; dashboard restarted before the session.</li>
+        <li>Ball centred on the start plate (0,4).</li>
+        <li>Aim: lit tail points <strong>away</strong> from the first straight.</li>
+        <li>One warm-up run on the demo floor.</li>
+        <li>First runs: try goal approach 1, then 0.8 if it rolls past. Then keep everything fixed.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3>If something goes wrong</h3>
+    <div class="scroll"><table>
+      <tr><th>What you see</th><th>What to do</th></tr>
+      <tr><td>Drives off at an angle from the start</td><td>Bad aim. Stop, re-place, re-aim, run again.</td></tr>
+      <tr><td>Stuck against a wall for a few seconds</td><td>Let the safety layer push (it checks after each push). If it is still stuck after ~10 s, stop and re-run.</td></tr>
+      <tr><td>Rolls past the goal plate</td><td>Next run: goal approach speed 0.8.</td></tr>
+      <tr><td>Won't connect</td><td>Close any other dashboard or script using the robot; only one connection at a time.</td></tr>
+      <tr><td>Timer</td><td>Starts when the ball first moves; limit 30 s; the whole ball must end inside the goal plate. Typical good run: 16–18 s.</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section id="followups">
+  <h2>Likely follow-up questions</h2>
+  <div class="card">
+    <div class="scroll"><table>
+      <tr><th>Question</th><th>Short answer</th></tr>
+      <tr><td>Why split by run, not by time step?</td><td>Neighbouring steps are nearly identical; mixing them across train and validation would make the validation score look better than it is.</td></tr>
+      <tr><td>Why normalise the loss?</td><td>The outputs have different units and sizes (mm vs m/s); dividing by each output's spread makes all four count equally.</td></tr>
+      <tr><td>Why work in the commanded-heading frame?</td><td>The physics is the same wherever the ball is in the maze; the frame removes position and orientation so the model only learns how the ball responds to a command.</td></tr>
+      <tr><td>Is it still "learning" if MPC chooses the command?</td><td>Yes: the dynamics the MPC plans with are learned from data. This is the model-based option listed on Ed #140.</td></tr>
+      <tr><td>What happens when the model is wrong?</td><td>The MPC re-plans every step from the latest estimate, so errors do not build up; jams and stalls are handled by the safety layer.</td></tr>
+      <tr><td>Why not reinforcement learning?</td><td>The simulator does not reproduce the coast or the speed gain, so a simulator-trained policy would not transfer, and there is not enough robot time to train on hardware.</td></tr>
+      <tr><td>Known weakness?</td><td>From standstill the model believes a bigger command moves the ball less (little start-up data). Handled in the controller: from rest it only chooses "stop" or a strong push.</td></tr>
+      <tr><td>What does the submitted M4-2 file contain?</td><td>The same pipeline in one file: the EKF, the A* planner, the learned model and MPC, and the safety layer, with the weights in <code>weight.pth</code>.</td></tr>
+    </table></div>
+  </div>
+</section>
+
+</div>
