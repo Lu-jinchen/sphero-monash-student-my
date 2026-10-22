@@ -1,0 +1,29 @@
+{
+  "source": "sim",
+  "labs": [
+    "lab3",
+    "lab4"
+  ],
+  "runs": 39,
+  "train_runs": 31,
+  "val_runs": 8,
+  "best_val_loss": 0.4613819420337677,
+  "train_n": 6251,
+  "val_n": 1570,
+  "one_step_mm": {
+    "sim_assumption": 4.619103918741149,
+    "constant_velocity": 0.3423431461525035,
+    "learned": 0.21610810376552678
+  },
+  "coast": {
+    "events": 26,
+    "actual_mean_cm": 2.840714774473038,
+    "hand_fit_mae_cm": 6.378062448501967,
+    "learned_mae_cm": 0.7075211555688696
+  },
+  "rollout_6_cm": {
+    "model": 0.3219267647132948,
+    "cmd_x_dt": 2.7188589136007475,
+    "const_vel": 0.756603990648919
+  }
+}
