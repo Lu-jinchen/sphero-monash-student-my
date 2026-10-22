@@ -22,7 +22,9 @@ The lab4.py skeleton is pre-configured with code to generate a simulated maze ma
 
 ## Automark assessment
 
-The automarker reads a CSV log from `studentid_lab3.csv`.
+The supplied brief says `studentid_lab3.csv`, which appears to be a carry-over
+from Lab 3. This implementation writes `studentid_lab4.csv`; confirm the exact
+filename required by the M4 upload page before submitting.
 
 ### Required CSV columns
 
