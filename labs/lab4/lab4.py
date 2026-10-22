@@ -39,12 +39,17 @@ except ImportError:
 
 try:
     import lab3 as lab3_stack
+    import lab3_compat
     from Policy import FEATURE_NAMES, TARGET_NAMES, Policy, require_torch, wrap_angle
     import training
 except ImportError:  # package-style import
     from ..lab3 import lab3 as lab3_stack
+    from . import lab3_compat
     from .Policy import FEATURE_NAMES, TARGET_NAMES, Policy, require_torch, wrap_angle
     from . import training
+
+# This repo's lab3.py predates the M3 demo constants Lab 4 reads.
+lab3_compat.ensure(lab3_stack)
 
 
 STUDENT_ID = lab3_stack.STUDENT_ID
